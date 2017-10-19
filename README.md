@@ -44,16 +44,11 @@ If you add jforum to an installation with existing sites, users will not have th
 
 **Add Jforum Icon to Sakai Left Menu**
 
-- If you are using sakai’s default cascading style sheet create the icons folder under tomcat/webapps/library/skin/default/
-and copy the image jforum-menu.png from jforum-tool/src/webapp/images/sakai-menu to
+Edit /reference/library/src/morpheus-master/sass/base/_icons.scss
 
-tomcat/webapps/library/skin/default/icons.
+add this to the #other tools section
 
-- Add the below line to tomcat/webapps/library/skin/default/portal.css
-
-.icon-sakai-jforum-tool{
-background-image: url(icons/jforum-menu.png);
-}
+.icon-sakai--sakai-jforum-tool {                          @extend .fa-comments-o; }
 
 **User Documentation**
 
