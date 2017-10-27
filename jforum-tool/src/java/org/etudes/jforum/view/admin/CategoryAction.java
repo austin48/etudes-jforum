@@ -1802,7 +1802,7 @@ public class CategoryAction extends AdminCommand
 	 * 		   false - if not added or updated in gradebook 
 	 * @throws Exception
 	 */
-	protected boolean updateGradebook(Grade grade) throws Exception 
+	protected synchronized boolean updateGradebook(Grade grade) throws Exception 
 	{
 		String gradebookUid = ToolManager.getInstance().getCurrentPlacement().getContext();
 		
@@ -1959,7 +1959,7 @@ public class CategoryAction extends AdminCommand
 	 * @param c			Category
 	 * @throws Exception
 	 */
-	protected void updateGradebookForumsTopics(Category c) throws Exception
+	protected synchronized void updateGradebookForumsTopics(Category c) throws Exception
 	{
 		//delete forum grade if existing 
 		Grade grade = DataAccessDriver.getInstance().newGradeDAO().selectByCategoryId(c.getId());

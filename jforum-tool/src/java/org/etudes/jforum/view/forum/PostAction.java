@@ -3004,7 +3004,7 @@ public class PostAction extends Command
 	 * 		   false - if not added or updated in gradebook 
 	 * @throws Exception
 	 */
-	protected boolean updateGradebook(Topic topic, Grade grade, Date endDate) throws Exception 
+	protected synchronized boolean updateGradebook(Topic topic, Grade grade, Date endDate) throws Exception 
 	{
 		String gradebookUid = ToolManager.getInstance().getCurrentPlacement().getContext();
 		

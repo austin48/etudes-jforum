@@ -1862,7 +1862,7 @@ public class JForumGradeServiceImpl implements JForumGradeService
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean updateGradebook(Grade grade, Category category)
+	public synchronized boolean updateGradebook(Grade grade, Category category)
 	{
 		if (grade == null || category == null)
 		{
@@ -1986,7 +1986,7 @@ public class JForumGradeServiceImpl implements JForumGradeService
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean updateGradebook(Grade grade, Forum forum)
+	public synchronized boolean updateGradebook(Grade grade, Forum forum)
 	{
 		if (grade == null || forum == null)
 		{
@@ -2167,7 +2167,7 @@ public class JForumGradeServiceImpl implements JForumGradeService
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean updateGradebook(Grade grade, Topic topic)
+	public synchronized boolean updateGradebook(Grade grade, Topic topic)
 	{
 		if (grade == null || topic == null)
 		{
@@ -2771,7 +2771,7 @@ public class JForumGradeServiceImpl implements JForumGradeService
 	 * 
 	 * @param evaluation	Evaluation
 	 */
-	protected void updateGradebookForUser(Grade grade, Evaluation evaluation)
+	protected synchronized void updateGradebookForUser(Grade grade, Evaluation evaluation)
 	{
 		if (grade == null || !grade.isAddToGradeBook() || evaluation == null) 
 		{

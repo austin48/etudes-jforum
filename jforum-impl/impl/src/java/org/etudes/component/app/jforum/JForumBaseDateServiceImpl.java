@@ -831,7 +831,7 @@ public class JForumBaseDateServiceImpl implements JForumBaseDateService
 	 * @param points		Points
 	 * @param dueDate		Due date
 	 */
-	protected void updateGradeBook(String gradebookUid, String url, Float points, String externalId, String title, Date dueDate)
+	protected synchronized void updateGradeBook(String gradebookUid, String url, Float points, String externalId, String title, Date dueDate)
 	{
 		if (jforumGBService.isGradebookDefined(gradebookUid))
 		{				
@@ -849,7 +849,7 @@ public class JForumBaseDateServiceImpl implements JForumBaseDateService
 	 * 
 	 * @param catGrade	Category Grade
 	 */
-	protected void updateGradebookCategory(Grade catGrade)
+	protected synchronized void updateGradebookCategory(Grade catGrade)
 	{
 		Category category = getCategory(catGrade.getCategoryId());
 		
@@ -874,7 +874,7 @@ public class JForumBaseDateServiceImpl implements JForumBaseDateService
 	 * 
 	 * @param forumGrade	Forum Grade
 	 */
-	protected void updateGradebookForum(Grade forumGrade)
+	protected synchronized void updateGradebookForum(Grade forumGrade)
 	{
 		Forum forum = getForum(forumGrade.getForumId());
 		
@@ -914,7 +914,7 @@ public class JForumBaseDateServiceImpl implements JForumBaseDateService
 	 * 
 	 * @param topicGrade	Topic Grade
 	 */
-	protected void updateGradebookTopic(Grade topicGrade)
+	protected synchronized void updateGradebookTopic(Grade topicGrade)
 	{
 		Topic topic = getTopic(topicGrade.getTopicId());
 		

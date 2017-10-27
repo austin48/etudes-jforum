@@ -1795,7 +1795,7 @@ public class ForumAction extends AdminCommand
 	 * 		   false - if not added or updated in gradebook 
 	 * @throws Exception
 	 */
-	protected boolean updateGradebook(Grade grade, Date endDate) throws Exception 
+	protected synchronized boolean updateGradebook(Grade grade, Date endDate) throws Exception 
 	{
 		String gradebookUid = ToolManager.getInstance().getCurrentPlacement().getContext();
 		
@@ -2316,7 +2316,7 @@ public class ForumAction extends AdminCommand
 	 * @param f			Forum
 	 * @throws Exception
 	 */
-	protected void updateGradebookTopics(Category c, Forum f) throws Exception
+	protected synchronized void updateGradebookTopics(Category c, Forum f) throws Exception
 	{
 		//delete forum grade if existing 
 		Grade grade = DataAccessDriver.getInstance().newGradeDAO().selectByForumId(f.getId());

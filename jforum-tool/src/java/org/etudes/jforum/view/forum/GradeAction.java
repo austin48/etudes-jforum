@@ -1705,7 +1705,7 @@ public class GradeAction extends Command
 	 * @param grade grade
 	 * @throws Exception
 	 */
-	private void updateGradebook(Grade grade) throws Exception 
+	private synchronized void updateGradebook(Grade grade) throws Exception 
 	{
 		String gradebookUid = ToolManager.getInstance().getCurrentPlacement().getContext();
 		List<Evaluation> evaluations = null;
@@ -1949,7 +1949,7 @@ public class GradeAction extends Command
 	 * @param evaluation evaluation
 	 * @throws Exception
 	 */
-	private void updateGradebookForUser(Grade grade, Evaluation evaluation) throws Exception 
+	private synchronized void updateGradebookForUser(Grade grade, Evaluation evaluation) throws Exception 
 	{
 		if (!grade.isAddToGradeBook()) return;
 		

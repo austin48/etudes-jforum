@@ -7247,7 +7247,7 @@ public class JForumPostServiceImpl implements JForumPostService
 	 * 
 	 * @param topic	Topic
 	 */
-	protected void updateGradeBook(Topic topic)
+	protected synchronized void updateGradeBook(Topic topic)
 	{
 		Site site = null;
 		
