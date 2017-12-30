@@ -62,6 +62,13 @@
                 <artifactId>etudes-util-util</artifactId>
                 <version>${etudes.util.version}</version>
             </dependency>
+            
+            <!-- jforum calendar popup doens't work in sakai 11.4, use ambrosia's calendar pop up instead -->
+			<dependency>
+				<groupId>org.etudes</groupId>
+				<artifactId>ambrosia_library</artifactId>
+				<version>${ambrosia.version}</version>
+			</dependency>
 
             <dependency>
                 <groupId>org.etudes</groupId>

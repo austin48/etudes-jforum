@@ -16,6 +16,9 @@
 - Get etudes-dependencies from https://github.com/sakaicontrib/etudes-dependencies.git
 - Place etudes-dependencies in the sakai source folder
 
+**Dependency on ambrosia**
+
+- Build etudes ambrosia before building jforum
 
 **Sakai.properties Configurations**
 
