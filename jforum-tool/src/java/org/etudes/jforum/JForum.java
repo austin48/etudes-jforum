@@ -244,7 +244,11 @@ public class JForum extends JForumBaseServlet
 					String contentType = dh.getContentType();
 					
 					if (contentType == null) {
-						contentType = "text/html; charset=" + encoding;
+                        if (response.getContentType() != null) {
+                            contentType = response.getContentType();
+                        } else {
+                            contentType = "text/html; charset=" + encoding;
+                        }
 					}
 					
 					response.setContentType(contentType);
