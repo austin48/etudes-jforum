@@ -263,7 +263,7 @@ public class JForumGBServiceImpl implements JForumGBService
 		boolean updateScoreSuccess = false;
 		try
 		{
-			gradebookService.updateExternalAssessmentScore(gradebookUid, externalId, studentUid, points.toString());
+			gradebookService.updateExternalAssessmentScore(gradebookUid, externalId, studentUid, ((points != null) ? (points.toString()):null));
 			updateScoreSuccess = true;
 		}
 		catch (GradebookNotFoundException e)
