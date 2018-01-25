@@ -72,7 +72,7 @@ function cal_popup2 (str_datetime) {
         //alert('dt current value in popup is '+this.dt_current.valueOf());
     var obj_calwindow = window.open(
 		'/ambrosia_library/calendar/calendar.html?datetime=' + this.dt_current.valueOf()+ '&ampmval=' + this.ampm_val +'&id=' + this.id,
-		'Calendar', 'width=250,height='+(this.time_comp ? 215 : 190)+
+		'Calendar', 'width=260,height='+(this.time_comp ? 215 : 190)+
 		',status=no,resizable=no,top=200,left=200,dependent=yes,alwaysRaised=yes'
 	);    
 	
