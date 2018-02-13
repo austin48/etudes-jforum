@@ -19,11 +19,14 @@
  ***********************************************************************************/
 package org.etudes.component.app.jforum;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
+import org.sakaiproject.db.api.SqlReader;
 import org.sakaiproject.db.cover.SqlService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -39,7 +42,7 @@ import org.sakaiproject.service.gradebook.shared.GradebookExternalAssessmentServ
 public class JForumGBServiceImpl implements JForumGBService
 {
 	private static Log logger = LogFactory.getLog(JForumGBServiceImpl.class);
-	private Map<String,String> gradableObjectsMap = new HashMap<String,String>();
+	private Map<String,Object[]> gradableObjectsMap = new HashMap<String,Object[]>();
 	
 	protected GradebookExternalAssessmentService gradebookService = null;
 	
@@ -132,10 +135,11 @@ public class JForumGBServiceImpl implements JForumGBService
 		
 		// insert category back into the gb_gradable_object_t record
         try {
-            String categoryId = gradableObjectsMap.get(gradableObjectKey);
-            if (categoryId != null) {
+            String categoryId = (String)gradableObjectsMap.get(gradableObjectKey)[0];     // index 0 is hardcoded to the categoryId
+            String isExtraCredit = (String)gradableObjectsMap.get(gradableObjectKey)[1];  // index 1 is hardcoded be is_extra_credit
+            if (categoryId != null || isExtraCredit != null) {
                 String sql = "update gb_gradable_object_t " 
-                        + "set category_id='" + categoryId + "' " 
+                        + "set category_id=" + categoryId + ",is_extra_credit=" + isExtraCredit + " "
                         + "where external_id='" + externalId + "' "
                         + "and gradebook_id = (select id from gb_gradebook_t where gradebook_uid='" + gradebookUid + "')";
                 
@@ -162,19 +166,31 @@ public class JForumGBServiceImpl implements JForumGBService
 		
 		try
 		{
-            String sql = "select category_id " 
+            String sql = "select b.category_id, b.is_extra_credit "
                     + "from gb_gradebook_t as a left join gb_gradable_object_t as b on a.id = b.gradebook_id " 
-                    + "where a.gradebook_uid='" + gradebookUid + "' and b.external_id='" + externalId + "'";
+                    + "where a.gradebook_uid=? and b.external_id=?";
 
-            List l = SqlService.dbRead(sql);
+            String fields[] = {gradebookUid, externalId};
+            List<String[]> l = SqlService.dbRead(sql, fields, new SqlReader() {
+                public Object readSqlResultRecord(ResultSet result) {
+                    try {
+                        String row[] = {result.getString(1), result.getString(2)};  // index 0 is the categoryId, index 1 is is_extra_credit
+                        return row;
+                    } catch ( SQLException e ) {
+                        throw new RuntimeException("Failed to find gradeable obejct for gradebookUid: " +  gradebookUid + ",external_id: " + externalId);
+                    }
+                }
+            });
             if (l != null && !l.isEmpty()) {
                 if (l.size() == 1) {
                     String categoryId = null;
-                    for (Object o : l) {
-                        categoryId = (String)o;
-                        //System.out.println("Gradable Object CATEGORY_ID: " + categoryId);
+                    String isExtraCredit = null;
+                    for (Object o[] : l) {
+                        //categoryId = (String)o[0];
+                        //isExtraCredit = (String)o[1];
+                        //System.out.println("Gradable Object CATEGORY_ID: " + categoryId + ", IS_EXTRA_CREDIT: " + isExtraCredit);
                         synchronized(gradableObjectsMap) {
-                            gradableObjectsMap.put(gradableObjectKey, categoryId);
+                            gradableObjectsMap.put(gradableObjectKey, o);
                             logger.info("gradableObjectsMap size after adding a category inside of synchronized block: " + gradableObjectsMap.size());
                         }
 
