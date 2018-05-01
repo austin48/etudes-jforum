@@ -1,3 +1,12 @@
+# NEW
+- apply (temp?) fix for SAK38428
+- add these to local.properties or sakai.properties
+
+jsf.state_saving_method.sakai.jforum.tool=server
+
+jsf.state_saving_method.sakai.synoptic.jforum.tool=server
+
+
 # etudes-jforum
 
 **Get the Source**
