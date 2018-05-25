@@ -24,6 +24,26 @@ import java.util.Map;
 
 public interface JForumService
 {
+	/** Event tracking */
+	static final String FORUM_CREATE = "jforum.forum.create";
+	static final String FORUM_EDIT = "jforum.forum.edit";
+	static final String FORUM_DELETE = "jforum.forum.delete";
+	static final String CATEGORY_CREATE = "jforum.category.create";
+	static final String CATEGORY_EDIT = "jforum.category.edit";
+	static final String CATEGORY_DELETE = "jforum.category.delete";
+	static final String TOPIC_CREATE = "jforum.topic.create";
+	static final String TOPIC_EDIT = "jforum.topic.edit";
+	static final String TOPIC_DELETE = "jforum.topic.delete";
+	static final String POST_CREATE = "jforum.post.create";
+	static final String POST_EDIT = "jforum.post.edit";
+	static final String POST_DELETE = "jforum.post.delete";
+	static final String TOPIC_READ = "jforum.topic.read";
+	static final String TOPIC_UNREAD = "jforum.topic.unread";
+	static final String PM_DELETE = "jforum.pm.delete";
+	static final String PM_SENT = "jforum.pm.sent";
+	static final String PM_REPLY = "jforum.pm.reply";
+	static final String JFORUM_SITE_REF = "/jforum/site/";
+
 	public static final String SERVLET_EXTENSION = ".page";
 	public enum Type { CATEGORY, FORUM, TOPIC }
 	

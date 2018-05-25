@@ -206,6 +206,10 @@
 		<property name="userDirectoryService">
 			<ref bean="org.sakaiproject.user.api.UserDirectoryService" />
 		</property>
+
+        <property name="eventTrackingService">
+            <ref bean="org.sakaiproject.event.api.EventTrackingService"/>
+        </property>
 	</bean>
 
 	<bean id="org.etudes.api.app.jforum.JForumForumService" 
@@ -255,6 +259,10 @@
 		<property name="jforumGBService">
 			<ref bean="org.etudes.api.app.jforum.JForumGBService" />
 		</property>
+
+        <property name="eventTrackingService">
+            <ref bean="org.sakaiproject.event.api.EventTrackingService"/>
+        </property>
 	</bean>
 
 	<bean id="org.etudes.api.app.jforum.JForumPostService" 
@@ -328,6 +336,10 @@
 		<property name="jforumForumService">
 			<ref bean="org.etudes.api.app.jforum.JForumForumService" />
 		</property>
+
+        <property name="eventTrackingService">
+            <ref bean="org.sakaiproject.event.api.EventTrackingService"/>
+        </property>
 	</bean>
 
 	<bean id="org.etudes.api.app.jforum.JForumGradeService" 
@@ -450,6 +462,10 @@
 		<property name="jforumSecurityService">
 			<ref bean="org.etudes.api.app.jforum.JForumSecurityService" />
 		</property>
+
+        <property name="eventTrackingService">
+            <ref bean="org.sakaiproject.event.api.EventTrackingService"/>
+        </property>
 	</bean>
 	
 	<bean id="org.etudes.api.app.jforum.JForumEmailService"

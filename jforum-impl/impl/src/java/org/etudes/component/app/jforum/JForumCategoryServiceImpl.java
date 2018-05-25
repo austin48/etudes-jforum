@@ -64,6 +64,7 @@ import org.etudes.util.api.AccessAdvisor;
 import org.sakaiproject.component.cover.ComponentManager;
 import org.sakaiproject.db.api.SqlReader;
 import org.sakaiproject.db.api.SqlService;
+import org.sakaiproject.event.api.EventTrackingService;
 import org.sakaiproject.exception.IdUnusedException;
 import org.sakaiproject.site.api.Site;
 import org.sakaiproject.site.api.SiteService;
@@ -110,6 +111,20 @@ public class JForumCategoryServiceImpl implements JForumCategoryService
 	
 	/** Dependency: UserDirectoryService. */
 	protected UserDirectoryService userDirectoryService = null;
+
+	/** Dependency: EventTrackingService */
+	protected EventTrackingService eventTrackingService = null;
+
+	/**
+	 * Dependency: EventTrackingService.
+	 *
+	 * @param service
+	 *        The EventTrackingService.
+	 */
+	public void setEventTrackingService(EventTrackingService service)
+	{
+		this.eventTrackingService = service;
+	}
 	
 	/**
 	 * {@inheritDoc}
@@ -194,6 +209,8 @@ public class JForumCategoryServiceImpl implements JForumCategoryService
 			jforumGradeService.updateGradebook(grade, category);
 		}
 		
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.CATEGORY_CREATE, JForumService.JFORUM_SITE_REF + category.getContext() + "; category_id:" + categoryId, true));
+
 		return categoryId;
 	}
 
@@ -250,6 +267,9 @@ public class JForumCategoryServiceImpl implements JForumCategoryService
 			}
 			
 		}
+
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.CATEGORY_DELETE, JForumService.JFORUM_SITE_REF + category.getContext() + "; category_id:" + category.getId(), true));
+
 	}
 
 	public void destroy()
@@ -1754,6 +1774,8 @@ public class JForumCategoryServiceImpl implements JForumCategoryService
 		// update category
 		categoryDao.update(category);
 		
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.CATEGORY_EDIT, JForumService.JFORUM_SITE_REF + category.getContext() + "; category_id:" + category.getId(), true));
+
 		// clear cache
 		if (category != null) clearCache(category);
 		

@@ -79,6 +79,7 @@ import org.sakaiproject.component.cover.ComponentManager;
 import org.sakaiproject.component.cover.ServerConfigurationService;
 import org.sakaiproject.db.api.SqlReader;
 import org.sakaiproject.db.api.SqlService;
+import org.sakaiproject.event.api.EventTrackingService;
 import org.sakaiproject.exception.IdUnusedException;
 import org.sakaiproject.site.api.Group;
 import org.sakaiproject.site.api.Site;
@@ -147,6 +148,20 @@ public class JForumPostServiceImpl implements JForumPostService
 	/** Dependency: TopicDao */
 	protected TopicDao topicDao = null;
 	
+	/** Dependency: EventTrackingService */
+	protected EventTrackingService eventTrackingService = null;
+
+	/**
+	 * Dependency: EventTrackingService.
+	 *
+	 * @param service
+	 *        The EventTrackingService.
+	 */
+	public void setEventTrackingService(EventTrackingService service)
+	{
+		this.eventTrackingService = service;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -611,6 +626,10 @@ public class JForumPostServiceImpl implements JForumPostService
 		// Index topic post for search
 		post = topic.getPosts().get(0);
 		jforumSearchIndexingExecutorService.indexPost(post);
+
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.TOPIC_CREATE, JForumService.JFORUM_SITE_REF + category.getContext() + "; forum_id:" + topic.getForumId() + "; topic_id:" + topicId, true));
+        String attachments_tracking = post.hasAttachments() ? "; attachments:true" : "";
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.POST_CREATE, JForumService.JFORUM_SITE_REF + category.getContext() + "; forum_id:" + topic.getForumId() + "; topic_id:" + topicId + "; post_id:" + post.getId() + attachments_tracking, true));
 		
 		return topicId;
 	}
@@ -1101,6 +1120,9 @@ public class JForumPostServiceImpl implements JForumPostService
 			}
 		}
 		
+        String attachments_tracking = post.hasAttachments() ? "; attachments:true" : "";
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.POST_CREATE, JForumService.JFORUM_SITE_REF + category.getContext() + "; forum_id:" + topic.getForumId() + "; topic_id:" + topic.getId() + "; post_id:" + postId + attachments_tracking, true));
+
 		return postId;
 	}
 	
@@ -1928,6 +1950,19 @@ public class JForumPostServiceImpl implements JForumPostService
 		}
 		
 		topicDao.updateTopicMarkTime(topicId, user.getId(), markTime, isRead);
+
+		String context = "unknown";
+		String forumId = "unknown";
+		Forum forum = getTopic(topicId).getForum();
+		if (forum != null) {
+			forumId = String.valueOf(forum.getId());
+			Category category = forum.getCategory();
+			if (category != null) {
+				context = category.getContext();
+			}
+		}
+        String isReadTracking = isRead ? JForumService.TOPIC_READ:JForumService.TOPIC_UNREAD;
+        eventTrackingService.post(eventTrackingService.newEvent(isReadTracking, JForumService.JFORUM_SITE_REF + context + "; forum_id:" + forumId + "; topic_id:" + topicId, true));
 	}
 	
 	/**
@@ -2429,6 +2464,9 @@ public class JForumPostServiceImpl implements JForumPostService
 		
 		// clear the cache
 		clearCache(exisTopic);
+
+        String attachments_tracking = post.hasAttachments() ? "; attachments:true" : "";
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.POST_EDIT, JForumService.JFORUM_SITE_REF + category.getContext() + "; forum_id:" + exisTopic.getForumId() + "; topic_id:" + exisTopic.getId() + "; post_id:" + post.getId() + attachments_tracking, true));
 	}
 	
 	
@@ -2949,6 +2987,10 @@ public class JForumPostServiceImpl implements JForumPostService
 		
 		// clear the cache
 		clearCache(exisTopic);
+
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.TOPIC_EDIT, JForumService.JFORUM_SITE_REF + category.getContext() + "; forum_id:" + exisTopic.getForumId() + "; topic_id:" + exisTopic.getId(), true));
+        String attachments_tracking = post.hasAttachments() ? "; attachments:true" : "";
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.POST_EDIT, JForumService.JFORUM_SITE_REF + category.getContext() + "; forum_id:" + exisTopic.getForumId() + "; topic_id:" + exisTopic.getId() + "; post_id:" + post.getId() + attachments_tracking, true));
 	}
 	
 	/**
@@ -3232,6 +3274,8 @@ public class JForumPostServiceImpl implements JForumPostService
 		
 		// clear the cache
 		clearCache(topic);
+
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.POST_DELETE, JForumService.JFORUM_SITE_REF + category.getContext() + "; forum_id:" + topic.getForumId() + "; topic_id:" + topic.getId() + "; post_id:" + postId, true));
 	}
 	
 	/**
@@ -3320,6 +3364,8 @@ public class JForumPostServiceImpl implements JForumPostService
 		{
 			jforumSearchIndexingExecutorService.cleanIndex(post);
 		}
+
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.TOPIC_DELETE, JForumService.JFORUM_SITE_REF + category.getContext() + "; forum_id:" + topic.getForumId() + "; topic_id:" + topic.getId(), true));
 	}
 	
 	/**

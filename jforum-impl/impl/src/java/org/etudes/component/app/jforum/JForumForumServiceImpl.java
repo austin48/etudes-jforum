@@ -59,6 +59,7 @@ import org.etudes.api.app.jforum.dao.ForumDao;
 import org.etudes.util.api.AccessAdvisor;
 import org.sakaiproject.authz.api.Member;
 import org.sakaiproject.component.cover.ComponentManager;
+import org.sakaiproject.event.api.EventTrackingService;
 import org.sakaiproject.db.api.SqlReader;
 import org.sakaiproject.db.api.SqlService;
 import org.sakaiproject.exception.IdUnusedException;
@@ -107,6 +108,20 @@ public class JForumForumServiceImpl implements JForumForumService
 	
 	/** Dependency: ThreadLocalManager. */
 	protected ThreadLocalManager threadLocalManager = null;
+
+	/** Dependency: EventTrackingService */
+	protected EventTrackingService eventTrackingService = null;
+
+	/**
+	 * Dependency: EventTrackingService.
+	 *
+	 * @param service
+	 *        The EventTrackingService.
+	 */
+	public void setEventTrackingService(EventTrackingService service)
+	{
+		this.eventTrackingService = service;
+	}
 	
 	/**
 	 * {@inheritDoc}
@@ -189,6 +204,8 @@ public class JForumForumServiceImpl implements JForumForumService
 		{
 			this.jforumGradeService.updateGradebook(forum.getGrade(), forum);
 		}
+
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.FORUM_CREATE, JForumService.JFORUM_SITE_REF + category.getContext() + "; forum_id:" + forumId, true));
 		
 		return forumId;
 		
@@ -247,6 +264,9 @@ public class JForumForumServiceImpl implements JForumForumService
 				jforumGradeService.removeGradebookEntry(grade);
 			}
 		}
+
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.FORUM_DELETE, JForumService.JFORUM_SITE_REF + category.getContext() + "; forum_id:" + forumId, true));
+
 	}
 	
 	public void destroy()
@@ -1006,7 +1026,9 @@ public class JForumForumServiceImpl implements JForumForumService
 		}
 		
 		forumDao.update(forum);
-		
+
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.FORUM_EDIT, JForumService.JFORUM_SITE_REF + category.getContext() + "; forum_id:" + forum.getId(), true));
+
 		// clear forum from thread local cache
 		clearCache(forum);
 		

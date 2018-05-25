@@ -40,6 +40,7 @@ import org.etudes.api.app.jforum.JForumAttachmentService;
 import org.etudes.api.app.jforum.JForumEmailExecutorService;
 import org.etudes.api.app.jforum.JForumPrivateMessageService;
 import org.etudes.api.app.jforum.JForumSecurityService;
+import org.etudes.api.app.jforum.JForumService;
 import org.etudes.api.app.jforum.JForumUserService;
 import org.etudes.api.app.jforum.Post;
 import org.etudes.api.app.jforum.PrivateMessage;
@@ -53,6 +54,7 @@ import org.etudes.util.XrefHelper;
 import org.sakaiproject.component.cover.ServerConfigurationService;
 import org.sakaiproject.db.api.SqlReader;
 import org.sakaiproject.db.api.SqlService;
+import org.sakaiproject.event.api.EventTrackingService;
 import org.sakaiproject.exception.IdUnusedException;
 import org.sakaiproject.site.api.Site;
 import org.sakaiproject.site.api.SiteService;
@@ -86,7 +88,21 @@ public class JForumPrivateMessageServiceImpl implements JForumPrivateMessageServ
 	
 	/** Dependency: SqlService */
 	protected SqlService sqlService = null;
-	
+
+	/** Dependency: EventTrackingService */
+	protected EventTrackingService eventTrackingService = null;
+
+	/**
+	 * Dependency: EventTrackingService.
+	 *
+	 * @param service
+	 *        The EventTrackingService.
+	 */
+	public void setEventTrackingService(EventTrackingService service)
+	{
+		this.eventTrackingService = service;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -143,6 +159,9 @@ public class JForumPrivateMessageServiceImpl implements JForumPrivateMessageServ
 				privateMessage.getPost().getAttachments().addAll(exisPrivateMessage.getPost().getAttachments());
 				jforumAttachmentService.deletePrivateMessageAttachments(privateMessage);
 			}
+
+            eventTrackingService.post(eventTrackingService.newEvent(JForumService.PM_DELETE, JForumService.JFORUM_SITE_REF + privateMessage.getContext(), true));
+
 		}		
 	}
 	
@@ -568,6 +587,8 @@ public class JForumPrivateMessageServiceImpl implements JForumPrivateMessageServ
 		
 		// send email if user opted to receive private message email's
 		sendPrivateMessageEmail(privateMessage);
+
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.PM_SENT, JForumService.JFORUM_SITE_REF + privateMessage.getContext(), true));
 	}
 	
 	/**
@@ -779,6 +800,8 @@ public class JForumPrivateMessageServiceImpl implements JForumPrivateMessageServ
 			privateMessage.setToUser(toUser);
 			sendPrivateMessageEmail(privateMessage);
 		}
+
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.PM_SENT, JForumService.JFORUM_SITE_REF + privateMessage.getContext(), true));
 	}
 
 	/**
@@ -1047,6 +1070,8 @@ public class JForumPrivateMessageServiceImpl implements JForumPrivateMessageServ
 		
 		// send email if user opted to receive private message email's
 		sendPrivateMessageEmail(privateMessage);
+
+        eventTrackingService.post(eventTrackingService.newEvent(JForumService.PM_REPLY, JForumService.JFORUM_SITE_REF + privateMessage.getContext(), true));
 	}
 	
 	/**
