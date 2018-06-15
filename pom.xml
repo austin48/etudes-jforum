@@ -45,6 +45,7 @@
     
     <properties>
         <etudes.util.version>1.0.26-SNAPSHOT</etudes.util.version>
+        <ambrosia.version>2.1.36-SNAPSHOT</ambrosia.version>
         <etudes.jforum.version>2.9.12-SNAPSHOT</etudes.jforum.version>
     </properties>
 
