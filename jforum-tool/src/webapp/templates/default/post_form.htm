@@ -861,11 +861,11 @@ function editorContent()
 				<tr align="center">
 					<td height="28" colspan="2" class="catBottom">              
 						<#--input class="mainoption" type="submit" value="${I18n.getMessage("PostForm.submit")}" name="post" accesskey="${I18n.getMessage("save-access")}" title="${I18n.getMessage("save-post-access-description")}"/>&nbsp;-->
-						<input type="submit" name="post" value="${I18n.getMessage("PostForm.submit")}" style="padding-left:2em;background: #2a94c0 url('${contextPath}/templates/${templateName}/images/return_sm.png') .2em no-repeat;" accesskey="${I18n.getMessage("save-access")}" title="${I18n.getMessage("save-post-access-description")}"/>
-						<input type="button" name="preview" value="${I18n.getMessage("PostForm.preview")}" style="padding-left:2em;background: #2a94c0 url('${contextPath}/templates/${templateName}/images/preview.png') .2em no-repeat;" accesskey="${I18n.getMessage("preview-access")}" title="${I18n.getMessage("preview-access-description")}" onclick="editorContent();previewMessage();"/>&nbsp;
+						<input type="submit" name="post" value="${I18n.getMessage("PostForm.submit")}" style="padding-left:2em;background-image: url('${contextPath}/templates/${templateName}/images/return_sm.png'); background-position: .2em; background-repeat: no-repeat;" accesskey="${I18n.getMessage("save-access")}" title="${I18n.getMessage("save-post-access-description")}"/>
+						<input type="button" name="preview" value="${I18n.getMessage("PostForm.preview")}" style="padding-left:2em;background-image: url('${contextPath}/templates/${templateName}/images/preview.png'); background-position: .2em; background-repeat: no-repeat;" accesskey="${I18n.getMessage("preview-access")}" title="${I18n.getMessage("preview-access-description")}" onclick="editorContent();previewMessage();"/>&nbsp;
 						<#if attachmentsEnabled>
 							<#--input class="mainoption" type="button" onClick="openAttachmentPanel();" value="${I18n.getMessage("Attachments.attach")}" name="post" accesskey="${I18n.getMessage("add-access")}" title="${I18n.getMessage("add-attach-access-description")}"/-->
-							<input type="button" onClick="openAttachmentPanel();" value="${I18n.getMessage("Attachments.attach")}" name="post" style="padding-left:2em;background: #2a94c0 url('${contextPath}/templates/${templateName}/images/attach.png') .2em no-repeat;" accesskey="${I18n.getMessage("add-access")}" title="${I18n.getMessage("add-attach-access-description")}"/>
+							<input type="button" onClick="openAttachmentPanel();" value="${I18n.getMessage("Attachments.attach")}" name="post" style="padding-left:2em;background-image: url('${contextPath}/templates/${templateName}/images/attach.png'); background-position: .2em; background-repeat: no-repeat;" accesskey="${I18n.getMessage("add-access")}" title="${I18n.getMessage("add-attach-access-description")}"/>
 						</#if>						
 					</td>
 				</tr>
@@ -907,7 +907,7 @@ function editorContent()
 			</tr>
 			<#if attachmentsEnabled>
 			<tr>
-				<td align="center" class="row3"><input type="button" name="add_attach" value="${I18n.getMessage("Attachments.anotherFile")}" onClick="addAttachmentFields()" style="padding-left:2em;background: #2a94c0 url('${contextPath}/templates/${templateName}/images/add.png') .2em no-repeat;"></td>
+				<td align="center" class="row3"><input type="button" name="add_attach" value="${I18n.getMessage("Attachments.anotherFile")}" onClick="addAttachmentFields()" style="padding-left:2em;background-image: url('${contextPath}/templates/${templateName}/images/add.png'); background-position: .2em; background-repeat: no-repeat;"></td>
 			</tr>
 			</#if>
 		</table>
