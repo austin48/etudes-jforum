@@ -335,9 +335,7 @@ function validatePostForm(f)
                                 var collectionId = "/private/jforum/" + window.top.location.pathname.split("/")[3] + "/docs/";
                                 var folder = "CurrentFolder=/private/jforum/" + window.top.location.pathname.split("/")[3] + "/docs/";
                                     
-                                var elfinderBuild = 'build';
-                                var elfinderUrl = '/library/editor/elfinder/sakai/elfinder.' + elfinderBuild +
-                                    '.html?connector=elfinder-connector/elfinder-servlet/connector';
+                                var elfinderUrl = '/library/editor/elfinder/sakai/elfinder.html?connector=elfinder-connector/elfinder-servlet/connector';
     
                                 var filebrowser = {
                                     browseUrl :      elfinderUrl + '&startdir=' + collectionId,
