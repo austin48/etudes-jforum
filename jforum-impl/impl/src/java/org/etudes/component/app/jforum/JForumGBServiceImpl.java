@@ -112,7 +112,7 @@ public class JForumGBServiceImpl implements JForumGBService
 		try
 		{
 			gradebookService.addExternalAssessment(gradebookUid, externalId, externalUrl, title, points, dueDate, 
-					externalServiceDescription);
+					externalServiceDescription, null);
 			
 			addSuccess = true;
 		}
@@ -226,7 +226,7 @@ public class JForumGBServiceImpl implements JForumGBService
 		boolean updateAssessment = false;
 		try
 		{
-			gradebookService.updateExternalAssessment(gradebookUid, externalId, externalUrl, title, points, dueDate);
+			gradebookService.updateExternalAssessment(gradebookUid, externalId, externalUrl, null, title, points, dueDate);
 			updateAssessment = true;
 		}
 		catch (GradebookNotFoundException e)
