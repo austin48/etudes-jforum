@@ -61,6 +61,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.Cookie;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.etudes.api.app.jforum.JForumAccessException;
@@ -75,6 +76,8 @@ import org.etudes.jforum.util.preferences.SakaiSystemGlobals;
 import org.etudes.jforum.util.preferences.SystemGlobals;
 import org.sakaiproject.component.cover.ComponentManager;
 import org.sakaiproject.component.cover.ServerConfigurationService;
+import org.sakaiproject.site.api.Site;
+import org.sakaiproject.site.cover.SiteService;
 import org.sakaiproject.tool.cover.ToolManager;
 import org.sakaiproject.user.cover.UserDirectoryService;
 
@@ -140,6 +143,22 @@ public class ControllerUtils
 		if (editorPath != null && editorPath.trim().length() > 0)
 		{
 			context.put("editorPath", editorPath);
+		}
+
+		try {
+			Site site = SiteService.getSite(ToolManager.getCurrentPlacement().getContext());
+			String strMathJaxEnabledForSite = site.getProperties().getProperty(Site.PROP_SITE_MATHJAX_ALLOWED);
+			String MATHJAX_SRC_PATH_SAKAI_PROP = "portal.mathjax.src.path";
+			String MATHJAX_SRC_PATH = ServerConfigurationService.getString(MATHJAX_SRC_PATH_SAKAI_PROP);
+			if (StringUtils.isNotBlank(strMathJaxEnabledForSite)) {
+				if (Boolean.valueOf(strMathJaxEnabledForSite)) {
+					// this call to MathJax.Hub.Config seems to be needed for MathJax to work in IE
+					context.put("mathJax","<script type=\"text/x-mathjax-config\">\nMathJax.Hub.Config({\nmessageStyle: \"none\",\ntex2jax: { inlineMath: [['\\\\(','\\\\)']] }\n});\n</script>\n" +
+										  "<script src=\"" + MATHJAX_SRC_PATH + "\" type=\"text/javascript\"></script>\n");
+				}
+			}
+		} catch (Exception e) {
+			logger.warn("Error: " + e);
 		}
 	}
 
