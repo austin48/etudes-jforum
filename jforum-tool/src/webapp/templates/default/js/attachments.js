@@ -78,7 +78,7 @@ var counter = 0;
 	{
 		var disabled = !(counter < maxAttachments);
 		document.post.add_attach.disabled = disabled;
-		document.post.add_attach.style.color = disabled ? "#cccccc" : "#000000";
+		// document.post.add_attach.style.color = disabled ? "#cccccc" : "#000000";
 	}
 </#if>
 
