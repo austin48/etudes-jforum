@@ -140,7 +140,7 @@ public class JForumTransferServiceImpl implements JForumTransferService, EntityT
 		return null;
 	}
 
-	public void transferCopyEntities(String fromContext, String toContext, List ids)
+	public Map<String, String> transferCopyEntities(String fromContext, String toContext, List<String> ids, List<String> transferOptions)
 	{
 		if (logger.isInfoEnabled())
 			logger.info("Entering transferCopyEntities.....");
@@ -149,12 +149,14 @@ public class JForumTransferServiceImpl implements JForumTransferService, EntityT
 
 		if (logger.isInfoEnabled())
 			logger.info("Exiting transferCopyEntities.....");
+
+		return null;
 	}
 
-	public void transferCopyEntities(String fromContext, String toContext, List ids, boolean cleanup)
+	public Map<String, String> transferCopyEntities(String fromContext, String toContext, List<String> ids, List<String> transferOptions, boolean cleanup)
 	{
 		// TODO: implement cleanup?
-		transferCopyEntities(fromContext, toContext, ids);
+		return transferCopyEntities(fromContext, toContext, ids, transferOptions);
 	}
 
 	/**
