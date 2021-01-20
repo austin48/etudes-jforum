@@ -7330,8 +7330,15 @@ public class JForumPostServiceImpl implements JForumPostService
 			{
 				gradebookToolId = "sakai.gradebook.tool";
 			}
+
+			String gradebookNgToolId = ServerConfigurationService.getString(JForumGradeService.GRADEBOOKNG_TOOL_ID);
+		
+			if ((gradebookNgToolId == null) || (gradebookNgToolId.trim().length() == 0))
+			{
+				gradebookNgToolId = "sakai.gradebookng";
+			}
 			
-            if (site.getToolForCommonId(gradebookToolId) != null)
+            if (site.getToolForCommonId(gradebookToolId) != null || site.getToolForCommonId(gradebookNgToolId) != null)
             {
             	gradebookAvailable = true;
             }

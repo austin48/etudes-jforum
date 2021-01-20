@@ -52,6 +52,7 @@ etudes.jforum.packaging.path = /var/jforum/packagefiles
 
 # Grade book tool id for grading
 etudes.jforum.sakai.gradebook.tool.id = sakai.gradebook.tool
+etudes.jforum.sakai.gradebookng.tool.id = sakai.gradebookng
 
 #Maximum number of users allowed to copy in Private Messages
 etudes.jforum.maxPMToUsers=10

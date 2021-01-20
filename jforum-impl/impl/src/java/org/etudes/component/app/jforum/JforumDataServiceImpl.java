@@ -956,6 +956,14 @@ public class JforumDataServiceImpl implements JforumDataService
 		{
 			gradebookToolId = "sakai.gradebook.tool";
 		}
+
+		String gradebookNgToolId = ServerConfigurationService.getString(JForumGradeService.GRADEBOOKNG_TOOL_ID);
+		
+		if ((gradebookNgToolId == null) || (gradebookNgToolId.trim().length() == 0))
+		{
+			gradebookNgToolId = "sakai.gradebookng";
+		}
+
 		
 		Site site = null;
 		try
@@ -972,7 +980,7 @@ public class JforumDataServiceImpl implements JforumDataService
 		}
 		
 		boolean gradebookExists = false;
-		if ((site != null) && (site.getToolForCommonId(gradebookToolId) != null))
+		if ((site != null) && ((site.getToolForCommonId(gradebookToolId) != null) || (site.getToolForCommonId(gradebookNgToolId) != null)))
 		{
 			gradebookExists = true;
 		}
@@ -2195,6 +2203,13 @@ public class JforumDataServiceImpl implements JforumDataService
 		{
 			gradebookToolId = "sakai.gradebook.tool";
 		}
+
+		String gradebookNgToolId = ServerConfigurationService.getString(JForumGradeService.GRADEBOOKNG_TOOL_ID);
+		
+		if ((gradebookNgToolId == null) || (gradebookNgToolId.trim().length() == 0))
+		{
+			gradebookNgToolId = "sakai.gradebookng";
+		}
 		
 		Site site = null;
 		try
@@ -2210,7 +2225,7 @@ public class JforumDataServiceImpl implements JforumDataService
 			}
 		}
 
-		if ((site != null) && (site.getToolForCommonId(gradebookToolId) != null))
+		if ((site != null) && ((site.getToolForCommonId(gradebookToolId) != null) || (site.getToolForCommonId(gradebookNgToolId) != null)))
 		{
 			String gradebookUid = ToolManager.getInstance().getCurrentPlacement().getContext();
 			
