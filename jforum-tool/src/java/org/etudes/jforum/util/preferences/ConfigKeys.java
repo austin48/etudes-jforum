@@ -318,6 +318,7 @@ public class ConfigKeys {
 	//For forum grading
 	// public static final String GRADEBOOK_TOOL_ID = "sakai.gradebook.tool.id";
 	public static final String GRADEBOOK_TOOL_ID = "etudes.jforum.sakai.gradebook.tool.id";
+	public static final String GRADEBOOKNG_TOOL_ID = "etudes.jforum.sakai.gradebookng.tool.id";
 	public static final String JFORUM_TOOL_ID = "etudes.jforum.sakai.jforum.tool.id";
 	
 	// for coursemap item identifier

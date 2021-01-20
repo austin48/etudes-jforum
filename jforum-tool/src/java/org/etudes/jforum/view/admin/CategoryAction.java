@@ -171,7 +171,7 @@ public class CategoryAction extends AdminCommand
 		this.context.put("viewTitleManageCatg", true);
 		
 		Site site = SiteService.getSite(ToolManager.getCurrentPlacement().getContext());
-		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null)
+		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null || site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOKNG_TOOL_ID)) != null)
 		{
 			this.context.put("enableGrading", Boolean.TRUE);
 		}
@@ -230,7 +230,7 @@ public class CategoryAction extends AdminCommand
 		}
 
 		Site site = SiteService.getSite(ToolManager.getCurrentPlacement().getContext());
-		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null)
+		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null || site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOKNG_TOOL_ID)) != null)
 		{
 			this.context.put("enableGrading", Boolean.TRUE);
 		}

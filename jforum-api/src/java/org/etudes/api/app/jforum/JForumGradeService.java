@@ -28,6 +28,7 @@ public interface JForumGradeService
 	
 	/**Gradebook tool id**/
 	public static final String GRADEBOOK_TOOL_ID = "etudes.jforum.sakai.gradebook.tool.id";
+	public static final String GRADEBOOKNG_TOOL_ID = "etudes.jforum.sakai.gradebookng.tool.id";
 	
 	/**JForum Gradebook external id concatenation text**/
 	public static final String JFORUM_GRADEBOOK_EXTERNAL_ID_CONCAT = "discussions-";

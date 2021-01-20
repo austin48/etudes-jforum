@@ -184,7 +184,7 @@ public class GradeAction extends Command
 
 		Site site = SiteService.getSite(ToolManager.getCurrentPlacement().getContext());
 
-		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null)
+		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null || site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOKNG_TOOL_ID)) != null)
 			this.context.put("addToGradebook", true);
 
 		// get evaluations
@@ -376,7 +376,7 @@ public class GradeAction extends Command
 		this.context.put("grade", grade);
 		Site site = SiteService.getSite(ToolManager.getCurrentPlacement().getContext());
 
-		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null)
+		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null || site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOKNG_TOOL_ID)) != null)
 		{
 			this.context.put("addToGradebook", true);
 		}
@@ -483,7 +483,7 @@ public class GradeAction extends Command
 		
 		Site site = SiteService.getSite(ToolManager.getCurrentPlacement().getContext());
 
-		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null)
+		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null || site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOKNG_TOOL_ID)) != null)
 		{
 			this.context.put("addToGradebook", true);
 		}
@@ -2139,7 +2139,7 @@ public class GradeAction extends Command
 
 		Site site = SiteService.getSite(ToolManager.getCurrentPlacement().getContext());
 
-		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null)
+		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null || site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOKNG_TOOL_ID)) != null)
 		{
 			this.context.put("addToGradebook", true);
 		}
@@ -2335,7 +2335,7 @@ public class GradeAction extends Command
 
 		Site site = SiteService.getSite(ToolManager.getCurrentPlacement().getContext());
 
-		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null)
+		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null || site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOKNG_TOOL_ID)) != null)
 		{
 			this.context.put("addToGradebook", true);
 		}
@@ -2447,7 +2447,7 @@ public class GradeAction extends Command
 
 		Site site = SiteService.getSite(ToolManager.getCurrentPlacement().getContext());
 
-		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null)
+		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null || site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOKNG_TOOL_ID)) != null)
 		{
 			this.context.put("addToGradebook", true);
 		}

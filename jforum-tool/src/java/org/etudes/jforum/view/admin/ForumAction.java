@@ -188,7 +188,7 @@ public class ForumAction extends AdminCommand
 
 		this.context.put("sakaigroups", sakaiSiteGroupsList);
 
-		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null)
+		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null || site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOKNG_TOOL_ID)) != null)
 		{
 			this.context.put("enableGrading", Boolean.TRUE);
 		}
@@ -291,7 +291,7 @@ public class ForumAction extends AdminCommand
 		int topicDatesCount =  jforumPostService.getTopicDatesCountByForum(forum.getId());
 		this.context.put("topicDates", ((topicDatesCount > 0) ? true : false));
 
-		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null)
+		if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null || site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOKNG_TOOL_ID)) != null)
 		{
 			this.context.put("enableGrading", Boolean.TRUE);
 		}

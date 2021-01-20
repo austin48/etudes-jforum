@@ -2543,7 +2543,7 @@ public class ImportExportAction extends AdminCommand
 			
 			Site site = SiteService.getSite(ToolManager.getCurrentPlacement().getContext());
 
-			if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null)
+			if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null || site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOKNG_TOOL_ID)) != null)
 			{
 				grade.setAddToGradeBook((addToGradebook == 1) ? true : false);
 			}
@@ -3170,7 +3170,7 @@ public class ImportExportAction extends AdminCommand
 			
 			Site site = SiteService.getSite(ToolManager.getCurrentPlacement().getContext());
 
-			if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null)
+			if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null || site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOKNG_TOOL_ID)) != null)
 			{
 				grade.setAddToGradeBook((addToGradebook == 1) ? true : false);
 			}
@@ -3548,7 +3548,7 @@ public class ImportExportAction extends AdminCommand
 			
 			Site site = SiteService.getSite(ToolManager.getCurrentPlacement().getContext());
 
-			if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null)
+			if (site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOK_TOOL_ID)) != null || site.getToolForCommonId(SakaiSystemGlobals.getValue(ConfigKeys.GRADEBOOKNG_TOOL_ID)) != null)
 			{
 				if (forum.getAccessType() != Forum.ACCESS_DENY)
 				{
