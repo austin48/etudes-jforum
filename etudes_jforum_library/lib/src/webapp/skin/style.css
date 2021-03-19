@@ -614,3 +614,16 @@ A.imgicon:hover {
 span.gen2 {
     FONT-WEIGHT: bold; FONT-SIZE: 12px
 }
+
+.savelink {
+    background-color: #15597e;
+    color: white !important;
+    padding: 6px 5px 4px 5px;
+    border-radius: 3px;
+    border: 1px solid #15597e;
+}
+
+.savelink:hover {
+    background-color: #fafafa !important;
+    color: black !important;
+}
