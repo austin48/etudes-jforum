@@ -694,7 +694,7 @@ CREATE INDEX jf_ss_course_id_idx ON jforum_sakai_sessions(course_id);
 CREATE TABLE jforum_topics_mark (
 topic_id mediumint(8) NOT NULL default '0',
 user_id mediumint(8) NOT NULL default '0',
-mark_time datetime NOT NULL default '0000-00-00 00:00:00',
+mark_time datetime NOT NULL default CURRENT_TIMESTAMP,
 PRIMARY KEY  (topic_id,user_id),
 CONSTRAINT fk_jf_topics FOREIGN KEY (topic_id) REFERENCES jforum_topics(topic_id) ON DELETE CASCADE ON UPDATE CASCADE)ENGINE=InnoDB;
 
