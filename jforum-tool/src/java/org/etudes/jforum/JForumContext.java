@@ -116,10 +116,15 @@ public class JForumContext {
     }
     
     public String encodeURLNoSiteParts(String url) {
-    	List<String> list = new ArrayList<String>(Arrays.asList(contextPath.split("/")));
-        list.remove(2);
-        list.remove(2);
-        String contextPathNoSiteParts = String.join("/", list);
+        String contextPathNoSiteParts = "";
+        if (contextPath.contains("site")) {
+            List<String> list = new ArrayList<String>(Arrays.asList(contextPath.split("/")));
+            list.remove(2);
+            list.remove(2);
+            contextPathNoSiteParts = String.join("/", list);
+        } else {
+            contextPathNoSiteParts = contextPath;
+        }
             
         if (isEncodingDisabled) {
             return contextPathNoSiteParts + url + servletExtension;
